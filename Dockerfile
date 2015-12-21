@@ -38,10 +38,8 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 RUN npm install -g json-server
 
-RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}'>~/data.json
+RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}'>/usr/local/etc/data.json
 
 EXPOSE 80
 
-WORKDIR  ~/
-
-CMD [ "json-server -p 80 --watch data.json" ]
+CMD [ "json-server -p 80  /usr/local/etc/data.json" ]
