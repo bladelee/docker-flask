@@ -40,6 +40,8 @@ RUN npm install -g json-server
 
 RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}'>/usr/local/etc/data.json
 
+ADD  /usr/local/etc/data.json  /usr/local/etc/data.json
+
 EXPOSE 80
 
 CMD [ "json-server -p 80  /usr/local/etc/data.json" ]
