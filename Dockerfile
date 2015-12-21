@@ -36,6 +36,10 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   && tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc
 
+RUN npm install -g json-server
+
+RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}'>data.json
+
 EXPOSE 80
 
-CMD [ "node" ]
+CMD [ "json-server -p 80 --watch data.json" ]
