@@ -38,8 +38,16 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 RUN npm install -g json-server
 
-RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}' >> /usr/local/etc/data.json
+RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}' >> data.json
+
+RUN  pwd 
+
+RUN git clone https://github.com/bladelee/docker-flask.git
+
+WORKDIR  ./docker-flask
+
+RUN git checkout node
 
 EXPOSE 80
 
-CMD [ "json-server -p 80  /usr/local/etc/data.json" ]
+CMD [ "json-server -p 80  db.json" ]
