@@ -42,4 +42,4 @@ RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]
 
 EXPOSE 80
 
-CMD [ "json-server",  "-p 80 --watch data.json" ]
+CMD [ "json-server -p 80 --watch data.json" ]
