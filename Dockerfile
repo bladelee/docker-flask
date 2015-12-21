@@ -40,7 +40,7 @@ RUN npm install -g json-server
 
 RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}' >> data.json
 
-RUN  pwd 
+RUN  mkdir /myapp
 
 RUN git clone https://github.com/bladelee/docker-flask.git
 
@@ -48,6 +48,10 @@ WORKDIR  ./docker-flask
 
 RUN git checkout node
 
+ADD .  /myapp
+
+WORKDIR  /myapp
+
 EXPOSE 80
 
-CMD [ "json-server -p 80  db.json" ]
+CMD [ "json-server -p 80  data.json" ]
