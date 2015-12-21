@@ -28,6 +28,6 @@ RUN pip install -r /var/www/app/requirements.txt
 # installl node
 
 
-EXPOSE 22
+EXPOSE 80
 
 CMD ["/usr/bin/supervisord"]
