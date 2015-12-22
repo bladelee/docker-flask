@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		curl \
 		wget \
     git  \
+    openssh-server  \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -ex \
@@ -49,7 +50,7 @@ RUN mv index.html public/
 RUN json-server db.json &
 
 #install sshd service
-RUN apt-get install -y openssh-server
+#RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
 RUN echo 'root:root' |chpasswd
