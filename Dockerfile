@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git  \
 	&& rm -rf /var/lib/apt/lists/*
 
-
 RUN set -ex \
   && for key in \
     9554F04D7259F04124DE6B476D5A82AC7E37093B \
@@ -44,6 +43,23 @@ WORKDIR  /myapp
 
 RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}' >> data.json
 
+RUN mkdir public 
+RUN echo "Hello Vwms" >> index.html
+RUN index.html public/
+RUN json-server db.json
+
+#install sshd service
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+
+RUN echo 'root:root' |chpasswd
+RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+
+EXPOSE 3000
+EXPOSE 22
 EXPOSE 80
 
 CMD [ "json-server -p 80  data.json"]
+
+# CMD ["/usr/sbin/sshd", "-D"]
