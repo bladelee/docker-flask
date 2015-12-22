@@ -45,7 +45,7 @@ RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]
 
 RUN mkdir public 
 RUN echo "Hello Vwms" >> index.html
-RUN index.html public/
+RUN mv index.html public/
 RUN json-server db.json
 
 #install sshd service
