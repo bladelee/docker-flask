@@ -53,11 +53,14 @@ RUN json-server db.json &
 #RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
-RUN echo 'root:root' |chpasswd
+RUN echo 'root:vwms' |chpasswd
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+RUN sed -ri 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 
 EXPOSE 3000
+
+
 EXPOSE 22
 EXPOSE 80
 
