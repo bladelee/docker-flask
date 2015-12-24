@@ -57,7 +57,7 @@ RUN sed -ri 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ss
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
-WORDDIR  /appdata/www
+WORKDIR  /appdata/www
 
 EXPOSE 3000
 EXPOSE 22
