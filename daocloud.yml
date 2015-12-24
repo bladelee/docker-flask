@@ -1,0 +1,24 @@
+image: daocloud.io/bladelee/flask:node-46fb8dd 
+services:
+
+
+env:
+    - MYENV = "hello"
+
+install:
+    - echo $MYENV
+    - echo "This is an install segment"
+    - echo "Here, we usually run scripts to setup a base environment"
+
+before_script:
+    - echo $MYENV
+    - echo "This is an before_script segment"
+    - echo "Here, we usually run scripts to prepare our test"
+
+script:
+    - echo $MYENV
+    - echo "This is an script segment"
+    - echo "Run test cases here"
+    - echo ""
+    - echo "Below shows how to use services"
+    - curl http://localhost:3000
