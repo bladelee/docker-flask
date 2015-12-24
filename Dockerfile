@@ -10,8 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		ca-certificates \
 		curl \
 		wget \
-    git  \
-    openssh-server  \
+        git  \
+        openssh-server \  
+        supervisor  \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -ex \
@@ -38,16 +39,12 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 RUN npm install -g json-server
 
-RUN  mkdir /myapp
-
-WORKDIR  /myapp
-
 RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}' >> data.json
-
 RUN mkdir public 
 RUN echo "Hello Vwms" >> index.html
 RUN mv index.html public/
-RUN json-server db.json &
+RUN  mkdir /myapp
+ADD . /myapp
 
 #install sshd service
 #RUN apt-get install -y openssh-server
@@ -58,12 +55,14 @@ RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN sed -ri 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 
+COPY supervisord.conf /etc/supervisor/supervisord.conf
+
+WORDDIR  /appdata/www
+
 EXPOSE 3000
-
-
 EXPOSE 22
 EXPOSE 80
 
-CMD [ "json-server -p 80  data.json"]
-
+CMD ["/usr/bin/supervisord"]
+#CMD [ "json-server -p 80  data.json"]
 # CMD ["/usr/sbin/sshd", "-D"]
