@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		curl \
 		wget \
         nginx  sed python-pip python-dev uwsgi-plugin-python supervisor  \
-        sqlite3 mysql-client  \ 
+        sqlite3 mysql-client  \
+        gcc \ 
 	&& rm -rf /var/lib/apt/lists/*
 
 # config python env
