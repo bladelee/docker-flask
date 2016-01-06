@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         git  \
         openssh-server  \
         nginx  sed python-pip python-dev uwsgi-plugin-python supervisor  \
+        sqlite3 mysql-client  \
         autoconf \
 		automake \
 		bzip2 \
@@ -71,11 +72,11 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 RUN npm install -g json-server
 
-RUN  echo '{"posts": [{ "id": 1, "title": "json-server", "author": "typicode" }]}' >> data.json
-RUN  mkdir /myapp
-RUN mkdir public 
-RUN echo "Hello Vwms" >> index.html
-RUN mv index.html public/
+
+RUN  mkdir /myapp    \
+     mkdir public    \
+     echo "Hello Vwms" >> index.html   \
+     mv index.html public/
 
 ADD  . /myapp
 
@@ -101,7 +102,6 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 copy app /var/www/app
 RUN pip install -r /var/www/app/requirements.txt
-
 
 WORKDIR  /appdata/www
 
