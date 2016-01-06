@@ -74,9 +74,9 @@ RUN npm install -g json-server
 
 
 RUN  mkdir /myapp    \
-     mkdir public    \
-     echo "Hello Vwms" >> index.html   \
-     mv index.html public/
+     && mkdir public    \
+     && echo "Hello Vwms" >> index.html   \
+     && mv index.html public/
 
 ADD  . /myapp
 
