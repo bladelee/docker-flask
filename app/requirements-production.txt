@@ -1,0 +1,28 @@
+# Flask
+Flask==0.10.1
+flask-marshmallow
+
+# Flask ext
+Flask-RESTful==0.3.4
+
+# Database and migrations
+pymysql==0.6.7
+Flask-SQLAlchemy==2.0
+marshmallow-sqlalchemy>=0.6.0
+
+#Print lib
+#Flask-WeasyPrint==0.5
+#WeasyPrint==0.24
+
+# Background worker and cache
+Flask-Cache==0.13.1
+
+# Authentication and authorization
+Flask-User==0.6.8
+Flask-JWT==0.3.2
+
+# Command line tasks
+
+# App server
+uwsgi==2.0.11
+

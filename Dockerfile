@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         nginx  sed python-pip python-dev uwsgi-plugin-python supervisor  \
         sqlite3 mysql-client  \
         gcc \ 
+        libffi-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 # config python env
@@ -27,7 +28,7 @@ RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 copy app /var/www/app
-RUN pip install -r /var/www/app/requirements.txt
+RUN pip install -r /var/www/app/requirements-production.txt
 
 EXPOSE 80
 
