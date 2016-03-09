@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y apt-transport-https \
     supervisor
 
 # Add the package signing key
-RUN curl -s 'https://zato.io/repo/zato-0CBD7F72.pgp.asc' | sudo apt-key add -
+RUN curl --insecure  -s 'https://zato.io/repo/zato-0CBD7F72.pgp.asc' | sudo apt-key add -
 
 # Add Zato repo to your apt
 # update sources and install Zato
